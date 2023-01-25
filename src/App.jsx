@@ -46,9 +46,9 @@ function App() {
       <div className='pokemons'>
         {pokemons.map(pokemon => {
           return (
-            <div className='pokemon' >
+            <div key={pokemon.id} className='pokemon' >
               <img src={pokemon.image} />
-              <h3>{pokemon.name}</h3>
+              <h3>#{pokemon.id} {pokemon.name}</h3>
             </div>
           )
         })}
