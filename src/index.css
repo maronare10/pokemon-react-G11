@@ -54,7 +54,7 @@ body {
 
 
 .pagination button {
-  border: 5px outset #f1f1f1;
+  border: 2px solid #f1f1f1;
   background-color: #f8f8f8;
   padding: 10px 20px;
   border-radius: 8px;

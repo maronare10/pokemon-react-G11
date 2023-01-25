@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 
 function App() {
   const [pokemons, setPokemons] = useState([])
+  const [page, setPage] = useState(1)
 
   const fetchPokemons = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=8')
+    const limit = 8
+    const offset = (page - 1) * limit
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
     const data = await response.json()
     const results = data.results.map(result => {
       // https://pokeapi.co/api/v2/pokemon/1/
@@ -24,9 +27,18 @@ function App() {
 
   }
 
+  const handlePrevtPage = () => {
+    setPage(page-1)
+  }
+  
+  const handleNextPage = () => {
+    setPage(page+1)
+  }
+
+
   useEffect(() => {
-    fetchPokemons()
-  }, [])
+    fetchPokemons(page)
+  }, [page])
 
   return (
     <div className='pokemonList'>
@@ -41,8 +53,15 @@ function App() {
           )
         })}
       </div>
+      <div className='pagination'>
+        <button onClick={handlePrevtPage}>Prev</button>
+        <span>{page}</span>
+        <button onClick={handleNextPage}>Next</button>
+      </div>
+
     </div>
   )
 }
 
 export default App
+
